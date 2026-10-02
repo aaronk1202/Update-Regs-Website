@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="favicon_TR.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Regulars | Kent Covers Band</title>
+<meta name="description" content="The Regulars are a four-piece Kent covers band playing pubs, parties, weddings and live music events.">
+<style>
+
+:root{--bg:#050505;--cream:#fff4df;--muted:#bdb3a6;--red:#e01822;--soft:#282828;--line:rgba(255,255,255,.16)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:950;text-transform:uppercase;font-size:28px;letter-spacing:-1px;line-height:.9}
+.links{display:flex;gap:20px;color:var(--muted);font-size:14px;font-weight:800}
+.button{display:inline-flex;justify-content:center;align-items:center;background:var(--red);color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:12px 18px;font-weight:950;cursor:pointer}
+.button.alt,.map-button{background:var(--soft);color:var(--cream)}
+
+.hero{padding:0 0 28px;background:#050505;border-bottom:1px solid var(--line)}
+.hero-image{width:100%;background:#000}
+.hero-image img{width:100%;height:auto;max-height:72vh;object-fit:contain;margin:0 auto}
+.hero-copy{padding-top:24px}
+h1{margin:0;font-size:clamp(56px,10vw,130px);line-height:.82;letter-spacing:-6px;text-transform:uppercase}
+h2{margin:0;font-size:clamp(34px,5vw,64px);line-height:.92;letter-spacing:-2px;text-transform:uppercase}
+h3{margin-top:0;font-size:28px}
+.hero p,.lead{color:var(--muted);font-size:clamp(18px,2vw,25px);max-width:820px}
+.hero p{color:var(--cream);margin:20px 0 26px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+section{padding:34px 0}
+.grid{display:grid;gap:18px}
+.two{grid-template-columns:1.05fr .95fr}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.055));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 26px 70px rgba(0,0,0,.42)}
+
+.promo-photo{margin-top:24px;border-radius:28px;overflow:hidden;border:1px solid var(--line);box-shadow:0 26px 70px rgba(0,0,0,.42)}
+.promo-photo img{width:100%;height:auto}
+
+.feature-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.feature{border:1px solid var(--line);border-radius:22px;padding:22px;background:rgba(255,255,255,.06);font-weight:900;font-size:20px}
+.song-list{columns:2;margin:18px 0 0;padding-left:20px;font-size:18px}
+.song-list li{break-inside:avoid;margin:0 0 8px}
+
+.lineup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.lineup-card{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:22px;padding:22px}
+.lineup-card strong{display:block;font-size:22px;margin-bottom:4px}
+.lineup-card span{display:block;color:var(--muted);font-weight:800;font-size:17px}
+
+.gigs{display:grid;gap:14px;margin-top:22px}
+.gig{display:grid;grid-template-columns:115px 1fr auto;align-items:center;gap:18px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:24px;padding:18px}
+.date{background:linear-gradient(180deg,var(--red),#9e1018);border-radius:20px;padding:14px 10px;text-align:center;text-transform:uppercase;font-weight:950;line-height:.95}
+.date span{display:block;font-size:38px}
+.gig h3{margin:0 0 4px;font-size:30px}
+.gig p{margin:0;color:var(--muted);font-size:18px}
+.map-button{border:1px solid var(--line);border-radius:999px;padding:12px 16px;font-weight:900;white-space:nowrap}
+
+/* Year filter for upcoming shows */
+.year-filter{display:flex;gap:10px;margin-top:20px;margin-bottom:22px}
+.year-filter button{appearance:none;border:1px solid var(--line);background:var(--soft);color:var(--cream);border-radius:999px;padding:10px 22px;font:inherit;font-weight:900;cursor:pointer}
+.year-filter button.active{background:var(--red);color:#fff;border-color:rgba(255,255,255,.22)}
+.gig[data-year]{display:grid}
+@media(max-width:560px){.year-filter{margin-top:16px;margin-bottom:18px}.year-filter button{flex:1;padding:10px 16px}}
+
+.gallery{display:grid;grid-template-columns:1.25fr .9fr .9fr;gap:16px;margin-top:22px}
+.gallery img{
+  width:100%;
+  height:auto;
+  max-height:none;
+  object-fit:contain;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:#111;
+}
+.gallery img:first-child{
+  grid-row:auto;
+  height:auto;
+}
+@media(min-width:901px){
+  .gallery{
+    align-items:start;
+  }
+}
+
+
+
+
+.contact-box{display:grid;grid-template-columns:.75fr 1.25fr;gap:18px;margin-top:22px}
+form{display:grid;gap:13px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+input,textarea,select{width:100%;border:1px solid var(--line);background:#111;color:var(--cream);border-radius:15px;padding:15px;font:inherit}
+select option{color:#111}
+textarea{min-height:145px;resize:vertical}
+footer{padding:36px 0;text-align:center;color:var(--muted);border-top:1px solid var(--line)}
+.footer-title{color:var(--cream);font-size:28px;font-weight:950;text-transform:uppercase}
+.socials{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+
+@media(max-width:900px){
+  .links{display:none}
+  .nav{min-height:68px}
+  .logo{font-size:23px}
+  .button{padding:11px 15px}
+  h1{letter-spacing:-4px}
+  .two,.feature-list,.gallery,.form-row,.contact-box{grid-template-columns:1fr}
+  .lineup-grid{grid-template-columns:1fr 1fr}
+  .song-list{columns:1}
+  .gig{grid-template-columns:92px 1fr}
+  .gig .map-button{grid-column:1/-1;text-align:center}
+  section{padding:30px 0}
+  .hero{padding-bottom:24px}
+  .hero-image img{max-height:none;width:100%;height:auto}
+  .hero-copy{padding-top:28px}
+  .promo-photo{margin-top:22px}
+  .gallery{gap:18px}
+.gallery img{
+  width:100%;
+  height:auto;
+  max-height:none;
+  object-fit:contain;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:#111;
+}
+.gallery img:first-child{
+  grid-row:auto;
+  height:auto;
+}
+@media(min-width:901px){
+  .gallery{
+    align-items:start;
+  }
+}
+
+  .gallery img,
+}
+@media(max-width:560px){
+  .lineup-grid{grid-template-columns:1fr}
+}
+
+
+/* Final spacing override */
+section{padding-top:34px;padding-bottom:34px}
+.hero{padding-bottom:28px}
+.hero-copy{padding-top:24px}
+.promo-photo,.gigs,.gallery,.lineup-grid,.contact-box{margin-top:22px}
+@media(max-width:900px){
+  section{padding-top:30px;padding-bottom:30px}
+  .hero{padding-bottom:24px}
+  .hero-copy{padding-top:22px}
+  .promo-photo,.gigs,.gallery,.lineup-grid,.contact-box{margin-top:20px}
+}
+
+
+/* Gallery desktop fix */
+@media(min-width:901px){
+  .gallery{
+    display:grid;
+    grid-template-columns:1.25fr .9fr .9fr;
+    gap:16px;
+    margin-top:22px;
+    align-items:stretch;
+  }
+  .gallery img{
+    width:100%;
+    height:310px;
+    object-fit:cover;
+    object-position:center center;
+    border-radius:24px;
+    border:1px solid var(--line);
+    background:#111;
+  }
+  .gallery img:first-child{
+    grid-row:span 2;
+    height:636px;
+  }
+}
+@media(max-width:900px){
+  .gallery{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
+    margin-top:20px;
+  }
+  .gallery img,
+  .gallery img:first-child{
+    width:100%;
+    height:auto;
+    grid-row:auto;
+    object-fit:contain;
+    border-radius:24px;
+  }
+}
+
+
+
+/* Fixed Frontman logo sizing - prevents text cut off */
+.logo-image{
+  display:flex !important;
+  align-items:center !important;
+  width:245px !important;
+  max-width:42vw !important;
+  height:70px !important;
+  overflow:visible !important;
+}
+.logo-image img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+}
+.hero-title-image{
+  margin:0 !important;
+  line-height:1 !important;
+  overflow:visible !important;
+  max-width:760px !important;
+}
+.hero-title-image img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+}
+@media(max-width:900px){
+  .logo-image{
+    width:205px !important;
+    max-width:54vw !important;
+    height:62px !important;
+  }
+  .hero-title-image{
+    max-width:100% !important;
+  }
+}
+
+
+/* Final logo fit fix */
+.nav{
+  gap:24px !important;
+}
+.logo-image{
+  flex:0 0 auto !important;
+  width:320px !important;
+  max-width:32vw !important;
+  min-width:0 !important;
+  height:auto !important;
+  overflow:visible !important;
+}
+.logo-image img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-width:100% !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+}
+.hero-title-image{
+  width:650px !important;
+  max-width:calc(100vw - 64px) !important;
+  height:auto !important;
+  overflow:visible !important;
+  margin:0 !important;
+  line-height:1 !important;
+}
+.hero-title-image img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+}
+@media(max-width:900px){
+  .logo-image{
+    width:230px !important;
+    max-width:54vw !important;
+  }
+  .hero-title-image{
+    width:100% !important;
+    max-width:100% !important;
+  }
+}
+@media(max-width:520px){
+  .logo-image{
+    width:190px !important;
+    max-width:52vw !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo logo-image" href="#top"><img src="regulars-logo-header.png" alt="The Regulars"></a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#songs">Songs</a><a href="#members">Line-up</a>
+      
+      <a href="#shows">Shows</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="button" href="#contact">Book us</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-image">
+    <img src="hero.jpg" alt="The Regulars band photo">
+  </div>
+  <div class="wrap hero-copy">
+    <h1 class="hero-title-image"><img src="regulars-logo-hero.png" alt="The Regulars"></h1>
+    <p>Four-piece covers band playing big singalong indie, rock, Britpop and party tunes for pubs, weddings, private parties and live music nights.</p>
+    <div class="hero-actions">
+      <a class="button" href="#contact">Booking enquiry</a>
+      <a class="button alt" href="#shows">Upcoming shows</a>
+      <a class="button alt" href="https://www.facebook.com/share/17ePzpiMP4/" target="_blank" rel="noopener">Facebook</a>
+      <a class="button alt" href="https://www.instagram.com/the_regulars_uk?igsh=cW4zdGp0bDZ5bnh4" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="grid two">
+      <div class="card">
+        <h3>About the band</h3>
+        <p>The Regulars are a four-piece covers band from Kent. Having played together for over 10 years, we perform a mix of Britpop, indie rock and well-known classics from artists including Oasis, Foo Fighters, Kings of Leon, The Killers, Sam Fender, Fleetwood Mac, Pulp and Kaiser Chiefs.</p>
+      </div>
+      <div class="card">
+        <h3>Available for</h3>
+        <div class="feature-list">
+          <div class="feature">Pubs</div>
+          <div class="feature">Bars</div>
+          <div class="feature">Private parties</div>
+          <div class="feature">Weddings</div>
+          <div class="feature">Live music nights</div>
+        </div>
+      </div>
+    </div>
+    <div class="promo-photo">
+      <img src="band-seafront-wide.jpg" alt="The Regulars band promo photo">
+    </div>
+  </div>
+</section>
+
+<section id="songs">
+  <div class="wrap">
+    <h2>What we play</h2>
+    <p class="lead">A mix of Britpop, indie rock, rock classics and songs to dance to.</p>
+    <div class="card" style="margin-top:34px">
+      <p>The Regulars play a mix of Britpop, indie rock, rock classics and songs to dance to, covering songs by artists such as Oasis, Foo Fighters, Kings of Leon, The Killers, Sam Fender, Fleetwood Mac, Pulp, Kaiser Chiefs, The Stone Roses and Bryan Adams.</p>
+      <p>Our set combines known favourites with songs that aren't found in every covers band's setlist, giving people the chance to sing and dance along to tracks they may not get to hear live.</p>
+      <p>For special events, we can also learn specific songs by agreement at the time of booking.</p>
+
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="members">
+  <div class="wrap">
+    <h2>Line-up</h2>
+    <div class="lineup-grid">
+      <div class="lineup-card"><strong>George Axon</strong><span>Guitar</span></div>
+      <div class="lineup-card"><strong>Adam McVey</strong><span>Drums / Vocals</span></div>
+      <div class="lineup-card"><strong>Matt Knox</strong><span>Guitar / Vocals</span></div>
+      <div class="lineup-card"><strong>Aaron Kitchener</strong><span>Bass</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="shows">
+  <div class="wrap">
+    <h2>Upcoming shows</h2>
+    <div class="year-filter" role="group" aria-label="Select gig year">
+      <button type="button" class="active" data-year-filter="2026" aria-pressed="true">2026</button>
+      <button type="button" data-year-filter="2027" aria-pressed="false">2027</button>
+    </div>
+    <div class="gigs">
+      <article class="gig" data-year="2026"><div class="date">Oct<span>2</span></div><div><h3>Market House</h3><p>Maidstone</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Market+House+Maidstone">Map</a></article>
+      <article class="gig" data-year="2026"><div class="date">Oct<span>24</span></div><div><h3>The Market Inn</h3><p>Sandwich</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=The+Market+Inn+Sandwich">Map</a></article>
+      <article class="gig" data-year="2026"><div class="date">Nov<span>8</span></div><div><h3>Baker Fest at Pier Ceylon</h3><p>Herne Bay</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Pier+Ceylon+Herne+Bay">Map</a></article>
+      <article class="gig" data-year="2026"><div class="date">Nov<span>29</span></div><div><h3>Walmer Castle Pub</h3><p>Deal &bull; 5pm start</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Walmer+Castle+Pub+Deal">Map</a></article>
+      <article class="gig" data-year="2026"><div class="date">Dec<span>11</span></div><div><h3>Invicta Bar</h3><p>Gravesend</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Invicta+Bar+Gravesend">Map</a></article>
+      <article class="gig" data-year="2026"><div class="date">Dec<span>24</span></div><div><h3>Pier Ceylon</h3><p>Herne Bay</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Pier+Ceylon+Herne+Bay">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Jan<span>16</span></div><div><h3>Quayside Bar &amp; Kitchen</h3><p>Whitstable</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Quayside+Bar+%26+Kitchen+Whitstable">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Jan<span>23</span></div><div><h3>Market House</h3><p>Maidstone</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Market+House+Maidstone">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Mar<span>13</span></div><div><h3>Coachworks Beer Hall</h3><p>Ashford</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Coachworks+Beer+Hall+Ashford">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">May<span>30</span></div><div><h3>The Bridge Arms</h3><p>Bridge</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=The+Bridge+Arms+Bridge+Kent">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Jun<span>12</span></div><div><h3>Queen's Head</h3><p>Ramsgate</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Queens+Head+Ramsgate">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Jun<span>26</span></div><div><h3>Coachworks Beer Hall</h3><p>Ashford</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Coachworks+Beer+Hall+Ashford">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Jul<span>30</span></div><div><h3>Market House</h3><p>Maidstone</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Market+House+Maidstone">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Aug<span>1</span></div><div><h3>The Bridge Arms</h3><p>Bridge</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=The+Bridge+Arms+Bridge+Kent">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Aug<span>14</span></div><div><h3>Quayside Bar &amp; Kitchen</h3><p>Whitstable</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Quayside+Bar+%26+Kitchen+Whitstable">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Aug<span>22</span></div><div><h3>Private Event</h3><p>Private event</p></div><span></span></article>
+      <article class="gig" data-year="2027"><div class="date">Oct<span>30</span></div><div><h3>Queen's Head</h3><p>Ramsgate</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Queens+Head+Ramsgate">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Nov<span>14</span></div><div><h3>The Bridge Arms</h3><p>Bridge</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=The+Bridge+Arms+Bridge+Kent">Map</a></article>
+      <article class="gig" data-year="2027"><div class="date">Nov<span>19</span></div><div><h3>Market House</h3><p>Maidstone</p></div><a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Market+House+Maidstone">Map</a></article>
+    </div>
+  </div>
+</section>
+
+<section id="photos">
+  </div>
+</section>
+
+<section id="photos">
+  <div class="wrap">
+    <h2>Photos</h2>
+    <div class="gallery">
+      <img src="band-striped-wall.jpg" alt="The Regulars band photo">
+      <img src="band-seafront-wide.jpg" alt="The Regulars seafront photo">
+      <img src="band-stairs.jpg" alt="The Regulars stairs photo">
+      <img src="band-low-angle.jpg" alt="The Regulars low angle photo">
+      <img src="band-seafront-close.jpg" alt="The Regulars close seafront photo">
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact / booking</h2>
+    <p class="lead">Message us on Facebook or send a booking enquiry using the form below.</p>
+    <div class="contact-box">
+      <div class="card">
+        <h3>Message us</h3>
+        <p>Quickest way to contact the band directly.</p>
+        <a class="button alt" href="https://www.facebook.com/share/17ePzpiMP4/" target="_blank" rel="noopener">Facebook</a>
+        <br><br>
+        <a class="button alt" href="https://www.instagram.com/the_regulars_uk?igsh=cW4zdGp0bDZ5bnh4" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <div class="card">
+        <h3>Booking enquiry form</h3>
+        <form action="https://formspree.io/f/mrednzbn" method="POST">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email address" required>
+          </div>
+          <div class="form-row">
+            <input type="tel" name="phone" placeholder="Phone number">
+            <input type="date" name="event_date">
+          </div>
+          <div class="form-row">
+            <input type="text" name="venue" placeholder="Venue / town">
+            <select name="event_type">
+              <option value="">Event type</option>
+              <option>Pub gig</option>
+              <option>Private party</option>
+              <option>Wedding</option>
+              <option>Live music night</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <textarea name="message" placeholder="Tell us timings, venue size, PA requirements and anything else useful"></textarea>
+          <button class="button" type="submit">Send enquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-title"><img src="regulars-logo-header.png" alt="The Regulars" style="height:42px;width:auto;display:inline-block;"></div>
+    <p>Kent covers band · Available across Kent</p>
+    <div class="socials">
+      <a class="button alt" href="https://www.facebook.com/share/17ePzpiMP4/" target="_blank" rel="noopener">Facebook</a>
+      <a class="button alt" href="https://www.instagram.com/the_regulars_uk?igsh=cW4zdGp0bDZ5bnh4" target="_blank" rel="noopener">Instagram</a>
+      <a class="button" href="#contact">Booking enquiry</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const buttons = document.querySelectorAll('[data-year-filter]');
+  const gigs = document.querySelectorAll('.gig[data-year]');
+  function showYear(year){
+    gigs.forEach(gig => { gig.style.display = gig.dataset.year === year ? '' : 'none'; });
+    buttons.forEach(button => {
+      const active = button.dataset.yearFilter === year;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+  buttons.forEach(button => button.addEventListener('click', () => showYear(button.dataset.yearFilter)));
+  showYear('2026');
+})();
+</script>
+</body>
+</html>
